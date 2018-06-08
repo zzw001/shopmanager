@@ -1,0 +1,187 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.shopmanager.dao.TransporterMapper" >
+  <resultMap id="BaseResultMap" type="com.shopmanager.model.Transporter" >
+    <id column="trer_id" property="trerId" jdbcType="INTEGER" />
+    <result column="trer_name" property="trerName" jdbcType="VARCHAR" />
+    <result column="trer_password" property="trerPassword" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    trer_id, trer_name, trer_password
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.shopmanager.model.TransporterExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from transporter
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select
+    <include refid="Base_Column_List" />
+    from transporter
+    where trer_id = #{trerId,jdbcType=INTEGER}
+  </select>
+  <select id="selectByTrerName" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select
+    <include refid="Base_Column_List" />
+    from transporter
+    where trer_name = #{trerName,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from transporter
+    where trer_id = #{trerId,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.shopmanager.model.TransporterExample" >
+    delete from transporter
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.shopmanager.model.Transporter" >
+    insert into transporter (trer_id, trer_name, trer_password
+      )
+    values (#{trerId,jdbcType=INTEGER}, #{trerName,jdbcType=VARCHAR}, #{trerPassword,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.shopmanager.model.Transporter" >
+    insert into transporter
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="trerId != null" >
+        trer_id,
+      </if>
+      <if test="trerName != null" >
+        trer_name,
+      </if>
+      <if test="trerPassword != null" >
+        trer_password,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="trerId != null" >
+        #{trerId,jdbcType=INTEGER},
+      </if>
+      <if test="trerName != null" >
+        #{trerName,jdbcType=VARCHAR},
+      </if>
+      <if test="trerPassword != null" >
+        #{trerPassword,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.shopmanager.model.TransporterExample" resultType="java.lang.Integer" >
+    select count(*) from transporter
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update transporter
+    <set >
+      <if test="record.trerId != null" >
+        trer_id = #{record.trerId,jdbcType=INTEGER},
+      </if>
+      <if test="record.trerName != null" >
+        trer_name = #{record.trerName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.trerPassword != null" >
+        trer_password = #{record.trerPassword,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update transporter
+    set trer_id = #{record.trerId,jdbcType=INTEGER},
+      trer_name = #{record.trerName,jdbcType=VARCHAR},
+      trer_password = #{record.trerPassword,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.shopmanager.model.Transporter" >
+    update transporter
+    <set >
+      <if test="trerName != null" >
+        trer_name = #{trerName,jdbcType=VARCHAR},
+      </if>
+      <if test="trerPassword != null" >
+        trer_password = #{trerPassword,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where trer_id = #{trerId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.shopmanager.model.Transporter" >
+    update transporter
+    set trer_name = #{trerName,jdbcType=VARCHAR},
+      trer_password = #{trerPassword,jdbcType=VARCHAR}
+    where trer_id = #{trerId,jdbcType=INTEGER}
+  </update>
+</mapper>

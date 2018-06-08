@@ -1,0 +1,169 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.shopmanager.dao.CatagoryMapper" >
+  <resultMap id="BaseResultMap" type="com.shopmanager.model.Catagory" >
+    <id column="cata_id" property="cataId" jdbcType="INTEGER" />
+    <result column="cata_name" property="cataName" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    cata_id, cata_name
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.shopmanager.model.CatagoryExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from catagory
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from catagory
+    where cata_id = #{cataId,jdbcType=INTEGER}
+  </select>
+  <select id="getAll" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from catagory
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from catagory
+    where cata_id = #{cataId,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.shopmanager.model.CatagoryExample" >
+    delete from catagory
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.shopmanager.model.Catagory" >
+    insert into catagory (cata_id, cata_name)
+    values (#{cataId,jdbcType=INTEGER}, #{cataName,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.shopmanager.model.Catagory" >
+    insert into catagory
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="cataId != null" >
+        cata_id,
+      </if>
+      <if test="cataName != null" >
+        cata_name,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="cataId != null" >
+        #{cataId,jdbcType=INTEGER},
+      </if>
+      <if test="cataName != null" >
+        #{cataName,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.shopmanager.model.CatagoryExample" resultType="java.lang.Integer" >
+    select count(*) from catagory
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update catagory
+    <set >
+      <if test="record.cataId != null" >
+        cata_id = #{record.cataId,jdbcType=INTEGER},
+      </if>
+      <if test="record.cataName != null" >
+        cata_name = #{record.cataName,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update catagory
+    set cata_id = #{record.cataId,jdbcType=INTEGER},
+      cata_name = #{record.cataName,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.shopmanager.model.Catagory" >
+    update catagory
+    <set >
+      <if test="cataName != null" >
+        cata_name = #{cataName,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where cata_id = #{cataId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.shopmanager.model.Catagory" >
+    update catagory
+    set cata_name = #{cataName,jdbcType=VARCHAR}
+    where cata_id = #{cataId,jdbcType=INTEGER}
+  </update>
+</mapper>
