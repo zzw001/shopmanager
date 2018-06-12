@@ -66,21 +66,20 @@
                     <c:forEach items="${catagories}" var="catagory">
                         <li class="list-group-item" cataid="${catagory.cataId}" >${catagory.cataName}</li>
                     </c:forEach>
-
                 </ul>
             </div>
             <div class="col-md-10" id="subcatabody">
             </div>
         </div>
         <div class="row content">
-            <div class="category-challenges tab-pane col-md-12">
-                <div class="col-md-3 d-inline-block">
-                    <button class="btn btn-light challenge-button w-100 text-truncate pt-3 pb-3 mb-2">
-                        <img src="/img/ctfd.svg" />
-                        <p>aaaa</p>
-                        <span>aaaaa</span>
-                    </button>
-                </div>
+            <div class="products tab-pane col-md-12">
+                <%--<div class="col-md-3 d-inline-block">--%>
+                    <%--<button class="btn btn-light challenge-button w-100 text-truncate pt-3 pb-3 mb-2">--%>
+                        <%--<img src="/img/ctfd.svg" />--%>
+                        <%--<p>aaaa</p>--%>
+                        <%--<span>aaaaa</span>--%>
+                    <%--</button>--%>
+                <%--</div>--%>
             </div>
         </div>
     </div>
@@ -96,12 +95,37 @@
                 var subcatas = $.parseJSON(JSON.stringify(data));
                 var subcatabody = $("#subcatabody").empty();
                 for(var i=0 ;i<subcatas.length;i++){
-                    var li = '<div class="col-md-3 d-inline-block" subcataid="'+subcatas[i].subId+'">'+subcatas[i].subName+'</div>';
+                    var li = '<div class="col-md-3 d-inline-block subcata" subcataid="'+subcatas[i].subId+'">'+subcatas[i].subName+'</div>';
                     subcatabody.append(li);
                 }
+                subcata_click();
             });
         });
     });
+    function subcata_click(){
+        $(".subcata").each(function () {
+            $(this).bind('click',function () {
+                var subid = $(this).attr("subcataid");
+                $.get('/subcata/'+subid+'/products','',function (data) {
+                    var probody = $(".products").empty();
+                    var products = $.parseJSON(JSON.stringify(data));
+                    for(var j=0;j<products.length;j++){
+                        var btn = '<div class="products tab-pane col-md-12">' +
+                            '                <div class="col-md-3 d-inline-block">' +
+                            '                    <button class="btn btn-light challenge-button w-100 text-truncate pt-3 pb-3 mb-2">' +
+                            '                        <img src="'+products[j].proImage+'" class="thumbnail img-responsive"/>' +
+                            '                        <p>'+products[j].proName+'</p>' +
+                            '                        <span>￥'+products[j].proPrice+'</span>' +
+                            '                    </button>' +
+                            '                </div>' +
+                            '            </div>';
+                        probody.append(btn);
+                    }
+                });
+            });
+        });
+    }
+
 </script>
 </body>
 </html>

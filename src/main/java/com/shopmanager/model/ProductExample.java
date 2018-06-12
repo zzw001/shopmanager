@@ -494,6 +494,76 @@ public class ProductExample {
             return (Criteria) this;
         }
 
+        public Criteria andProImageIsNull() {
+            addCriterion("pro_image is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andProImageIsNotNull() {
+            addCriterion("pro_image is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andProImageEqualTo(String value) {
+            addCriterion("pro_image =", value, "proImage");
+            return (Criteria) this;
+        }
+
+        public Criteria andProImageNotEqualTo(String value) {
+            addCriterion("pro_image <>", value, "proImage");
+            return (Criteria) this;
+        }
+
+        public Criteria andProImageGreaterThan(String value) {
+            addCriterion("pro_image >", value, "proImage");
+            return (Criteria) this;
+        }
+
+        public Criteria andProImageGreaterThanOrEqualTo(String value) {
+            addCriterion("pro_image >=", value, "proImage");
+            return (Criteria) this;
+        }
+
+        public Criteria andProImageLessThan(String value) {
+            addCriterion("pro_image <", value, "proImage");
+            return (Criteria) this;
+        }
+
+        public Criteria andProImageLessThanOrEqualTo(String value) {
+            addCriterion("pro_image <=", value, "proImage");
+            return (Criteria) this;
+        }
+
+        public Criteria andProImageLike(String value) {
+            addCriterion("pro_image like", value, "proImage");
+            return (Criteria) this;
+        }
+
+        public Criteria andProImageNotLike(String value) {
+            addCriterion("pro_image not like", value, "proImage");
+            return (Criteria) this;
+        }
+
+        public Criteria andProImageIn(List<String> values) {
+            addCriterion("pro_image in", values, "proImage");
+            return (Criteria) this;
+        }
+
+        public Criteria andProImageNotIn(List<String> values) {
+            addCriterion("pro_image not in", values, "proImage");
+            return (Criteria) this;
+        }
+
+        public Criteria andProImageBetween(String value1, String value2) {
+            addCriterion("pro_image between", value1, value2, "proImage");
+            return (Criteria) this;
+        }
+
+        public Criteria andProImageNotBetween(String value1, String value2) {
+            addCriterion("pro_image not between", value1, value2, "proImage");
+            return (Criteria) this;
+        }
+
         public Criteria andSubIdIsNull() {
             addCriterion("sub_id is null");
             return (Criteria) this;

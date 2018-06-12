@@ -3,7 +3,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>快递管理系统</title>
+    <title>商品录入系统</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="${requestScope.getContextPath}/css/bootstrap.min.css">
@@ -14,9 +14,8 @@
 <body>
 <div class="jumbotron">
     <div class="container text-center">
-        <h1>快递管理系统</h1>
+        <h1>商品列表</h1>
     </div>
 </div>
-
 </body>
 </html>

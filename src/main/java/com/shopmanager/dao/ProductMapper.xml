@@ -8,6 +8,7 @@
     <result column="pro_stack" property="proStack" jdbcType="INTEGER" />
     <result column="pro_size" property="proSize" jdbcType="VARCHAR" />
     <result column="pro_desc" property="proDesc" jdbcType="VARCHAR" />
+    <result column="pro_image" property="proImage" jdbcType="VARCHAR" />
     <result column="sub_id" property="subId" jdbcType="INTEGER" />
   </resultMap>
   <sql id="Example_Where_Clause" >
@@ -69,7 +70,7 @@
     </where>
   </sql>
   <sql id="Base_Column_List" >
-    pro_id, pro_name, pro_price, pro_stack, pro_size, pro_desc, sub_id
+    pro_id, pro_name, pro_price, pro_stack, pro_size, pro_desc, pro_image, sub_id
   </sql>
   <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.shopmanager.model.ProductExample" >
     select
@@ -91,6 +92,12 @@
     from product
     where pro_id = #{proId,jdbcType=INTEGER}
   </select>
+  <select id="selectBySubId" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select
+    <include refid="Base_Column_List" />
+    from product
+    where sub_id = #{subId,jdbcType=INTEGER}
+  </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
     delete from product
     where pro_id = #{proId,jdbcType=INTEGER}
@@ -104,10 +111,10 @@
   <insert id="insert" parameterType="com.shopmanager.model.Product" >
     insert into product (pro_id, pro_name, pro_price, 
       pro_stack, pro_size, pro_desc, 
-      sub_id)
+      pro_image, sub_id)
     values (#{proId,jdbcType=INTEGER}, #{proName,jdbcType=VARCHAR}, #{proPrice,jdbcType=INTEGER}, 
       #{proStack,jdbcType=INTEGER}, #{proSize,jdbcType=VARCHAR}, #{proDesc,jdbcType=VARCHAR}, 
-      #{subId,jdbcType=INTEGER})
+      #{proImage,jdbcType=VARCHAR}, #{subId,jdbcType=INTEGER})
   </insert>
   <insert id="insertSelective" parameterType="com.shopmanager.model.Product" >
     insert into product
@@ -129,6 +136,9 @@
       </if>
       <if test="proDesc != null" >
         pro_desc,
+      </if>
+      <if test="proImage != null" >
+        pro_image,
       </if>
       <if test="subId != null" >
         sub_id,
@@ -152,6 +162,9 @@
       </if>
       <if test="proDesc != null" >
         #{proDesc,jdbcType=VARCHAR},
+      </if>
+      <if test="proImage != null" >
+        #{proImage,jdbcType=VARCHAR},
       </if>
       <if test="subId != null" >
         #{subId,jdbcType=INTEGER},
@@ -185,6 +198,9 @@
       <if test="record.proDesc != null" >
         pro_desc = #{record.proDesc,jdbcType=VARCHAR},
       </if>
+      <if test="record.proImage != null" >
+        pro_image = #{record.proImage,jdbcType=VARCHAR},
+      </if>
       <if test="record.subId != null" >
         sub_id = #{record.subId,jdbcType=INTEGER},
       </if>
@@ -201,6 +217,7 @@
       pro_stack = #{record.proStack,jdbcType=INTEGER},
       pro_size = #{record.proSize,jdbcType=VARCHAR},
       pro_desc = #{record.proDesc,jdbcType=VARCHAR},
+      pro_image = #{record.proImage,jdbcType=VARCHAR},
       sub_id = #{record.subId,jdbcType=INTEGER}
     <if test="_parameter != null" >
       <include refid="Update_By_Example_Where_Clause" />
@@ -224,6 +241,9 @@
       <if test="proDesc != null" >
         pro_desc = #{proDesc,jdbcType=VARCHAR},
       </if>
+      <if test="proImage != null" >
+        pro_image = #{proImage,jdbcType=VARCHAR},
+      </if>
       <if test="subId != null" >
         sub_id = #{subId,jdbcType=INTEGER},
       </if>
@@ -237,6 +257,7 @@
       pro_stack = #{proStack,jdbcType=INTEGER},
       pro_size = #{proSize,jdbcType=VARCHAR},
       pro_desc = #{proDesc,jdbcType=VARCHAR},
+      pro_image = #{proImage,jdbcType=VARCHAR},
       sub_id = #{subId,jdbcType=INTEGER}
     where pro_id = #{proId,jdbcType=INTEGER}
   </update>

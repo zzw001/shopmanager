@@ -40,15 +40,15 @@
         </javaClientGenerator>
 
         <!--对应数据库表名 如果是多个的话，写多行-->
-        <table tableName="user"></table>
-        <table tableName="catagory"></table>
+        <!--<table tableName="user"></table>-->
+        <!--<table tableName="catagory"></table>-->
         <table tableName="product"></table>
-        <table tableName="shopcart"></table>
-        <table tableName="subcata"></table>
-        <table tableName="tran_info"></table>
-        <table tableName="transportation"></table>
-        <table tableName="transporter"></table>
-        <table tableName="manager"></table>
+        <!--<table tableName="shopcart"></table>-->
+        <!--<table tableName="subcata"></table>-->
+        <!--<table tableName="tran_info"></table>-->
+        <!--<table tableName="transportation"></table>-->
+        <!--<table tableName="transporter"></table>-->
+        <!--<table tableName="manager"></table>-->
 
     </context>
 </generatorConfiguration>

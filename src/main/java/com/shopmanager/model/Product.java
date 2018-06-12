@@ -13,6 +13,8 @@ public class Product {
 
     private String proDesc;
 
+    private String proImage;
+
     private Integer subId;
 
     public Integer getProId() {
@@ -61,6 +63,14 @@ public class Product {
 
     public void setProDesc(String proDesc) {
         this.proDesc = proDesc == null ? null : proDesc.trim();
+    }
+
+    public String getProImage() {
+        return proImage;
+    }
+
+    public void setProImage(String proImage) {
+        this.proImage = proImage == null ? null : proImage.trim();
     }
 
     public Integer getSubId() {

@@ -2,9 +2,11 @@ package com.shopmanager.controller;
 
 import com.alibaba.fastjson.JSON;
 import com.shopmanager.model.Catagory;
+import com.shopmanager.model.Product;
 import com.shopmanager.model.Subcata;
 import com.shopmanager.model.User;
 import com.shopmanager.service.CatagoryService;
+import com.shopmanager.service.ProductService;
 import com.shopmanager.service.SubCataService;
 import com.shopmanager.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,6 +14,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -29,6 +32,9 @@ public class CommonController {
 
     @Autowired
     private UserService userService;
+
+    @Autowired
+    private ProductService productService;
 
     @RequestMapping("/")
     public String index(Model model){
@@ -124,5 +130,19 @@ public class CommonController {
             return "index";
         }
         return "register";
+    }
+
+    @RequestMapping("/subcata/{subid}/products")
+    public void getProduct(@PathVariable("subid")String subid,HttpServletResponse response){
+        int subcata = Integer.parseInt(subid);
+        List<Product> products = productService.getBySubId(subcata);
+        String data = JSON.toJSONString(products);
+        System.out.println(data);
+        try {
+            response.setContentType("application/json");
+            response.getWriter().print(data);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 }
