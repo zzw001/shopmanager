@@ -29,4 +29,6 @@ public interface ProductMapper {
     int updateByPrimaryKey(Product record);
 
     List<Product> selectBySubId(Integer subId);
+
+    List<Product> selectBySearch(String search);
 }

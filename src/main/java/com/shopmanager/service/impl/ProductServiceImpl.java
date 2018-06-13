@@ -28,4 +28,9 @@ public class ProductServiceImpl implements ProductService {
     public Product getByProId(int id) {
         return productMapper.selectByPrimaryKey(id);
     }
+
+    @Override
+    public List<Product> getBySearch(String search) {
+        return productMapper.selectBySearch(search);
+    }
 }

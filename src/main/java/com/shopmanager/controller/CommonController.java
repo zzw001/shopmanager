@@ -19,6 +19,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.io.UnsupportedEncodingException;
+import java.net.URLDecoder;
 import java.util.List;
 
 @Controller
@@ -144,5 +146,30 @@ public class CommonController {
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    @RequestMapping("/search/{search}")
+    public void search(@PathVariable("search")String search,HttpServletResponse response){
+        try {
+            search = URLDecoder.decode(search,"utf-8");
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+        }
+        List<Product> products = productService.getBySearch(search);
+        String data = JSON.toJSONString(products);
+        try {
+            response.setContentType("application/json");
+            response.getWriter().print(data);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @RequestMapping("/product/{proid}")
+    public String product(@PathVariable("proid")String proid,Model model){
+        int id = Integer.parseInt(proid);
+        Product product = productService.getByProId(id);
+        model.addAttribute("product",product);
+        return "product";
     }
 }

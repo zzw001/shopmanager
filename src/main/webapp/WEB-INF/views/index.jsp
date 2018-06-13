@@ -57,7 +57,7 @@
         <div class="row">
             <div class="col-md-12">
                 <input class="search col-md-10" type="text" name="search" id="search"/>
-                <button class="btn btn-primary fas fa-search"></button>
+                <button type="button" class="btn btn-primary fas fa-search search-button"></button>
             </div>
         </div>
         <div class="row category">
@@ -73,13 +73,7 @@
         </div>
         <div class="row content">
             <div class="products tab-pane col-md-12">
-                <%--<div class="col-md-3 d-inline-block">--%>
-                    <%--<button class="btn btn-light challenge-button w-100 text-truncate pt-3 pb-3 mb-2">--%>
-                        <%--<img src="/img/ctfd.svg" />--%>
-                        <%--<p>aaaa</p>--%>
-                        <%--<span>aaaaa</span>--%>
-                    <%--</button>--%>
-                <%--</div>--%>
+
             </div>
         </div>
     </div>
@@ -88,6 +82,30 @@
 <script src="js/jquery.min.js"></script>
 <script src="js/bootstrap.min.js"></script>
 <script>
+    $(".search-button").click(function (){
+        var search = $("#search").val().trim();
+        if(search == null || search.length == 0){
+            return false;
+        }
+        $.get('/search/'+search,'',function (data) {
+            var probody = $(".products").empty();
+            var products = $.parseJSON(JSON.stringify(data));
+            for(var j=0;j<products.length;j++){
+                var btn = '<div class="products tab-pane col-md-12">' +
+                    '                <div class="col-md-3 visible-md-inline-block img-thumbnail">' +
+                    '                    <button class="btn btn-light challenge-button w-100 text-truncate pt-3 pb-3 mb-2">' +
+                    '                        <img src="'+products[j].proImage+'" class="thumbnail img-responsive"/>' +
+                    '                        <a href="/product/"+products[j].proId>'+products[j].proName+'</a>' +
+                    '                        <span>￥'+products[j].proPrice+'</span>' +
+                    '                    </button>' +
+                    '                </div>' +
+                    '            </div>';
+                probody.append(btn);
+            }
+        });
+        return false;
+    });
+
     $(".list-group-item").each(function () {
         $(this).bind('click',function () {
             var cataid = $(this).attr("cataid");
@@ -95,7 +113,7 @@
                 var subcatas = $.parseJSON(JSON.stringify(data));
                 var subcatabody = $("#subcatabody").empty();
                 for(var i=0 ;i<subcatas.length;i++){
-                    var li = '<div class="col-md-3 d-inline-block subcata" subcataid="'+subcatas[i].subId+'">'+subcatas[i].subName+'</div>';
+                    var li = '<div class="thumbnail col-md-2 d-inline-block subcata" subcataid="'+subcatas[i].subId+'">'+subcatas[i].subName+'</div>';
                     subcatabody.append(li);
                 }
                 subcata_click();
@@ -111,13 +129,13 @@
                     var products = $.parseJSON(JSON.stringify(data));
                     for(var j=0;j<products.length;j++){
                         var btn = '<div class="products tab-pane col-md-12">' +
-                            '                <div class="col-md-3 d-inline-block">' +
+                            '                <a class="col-md-3 visible-md-inline-block img-thumbnail" href="/product/'+products[j].proId+'">' +
                             '                    <button class="btn btn-light challenge-button w-100 text-truncate pt-3 pb-3 mb-2">' +
                             '                        <img src="'+products[j].proImage+'" class="thumbnail img-responsive"/>' +
                             '                        <p>'+products[j].proName+'</p>' +
                             '                        <span>￥'+products[j].proPrice+'</span>' +
                             '                    </button>' +
-                            '                </div>' +
+                            '                </a>' +
                             '            </div>';
                         probody.append(btn);
                     }

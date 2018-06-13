@@ -10,4 +10,6 @@ public interface ProductService {
     List<Product> getBySubId(int subid);
 
     Product getByProId(int id);
+
+    List<Product> getBySearch(String search);
 }

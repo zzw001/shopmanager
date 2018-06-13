@@ -98,6 +98,12 @@
     from product
     where sub_id = #{subId,jdbcType=INTEGER}
   </select>
+  <select id="selectBySearch" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select
+    <include refid="Base_Column_List" />
+    from product
+    where pro_name like "%"#{Search,jdbcType=VARCHAR}"%"
+  </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
     delete from product
     where pro_id = #{proId,jdbcType=INTEGER}
