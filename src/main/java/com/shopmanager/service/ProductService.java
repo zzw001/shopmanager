@@ -7,9 +7,13 @@ import java.util.List;
 public interface ProductService {
     int add(Product product);
 
+    int update(Product product);
+
     List<Product> getBySubId(int subid);
 
     Product getByProId(int id);
 
     List<Product> getBySearch(String search);
+
+    List<Product> getAll();
 }

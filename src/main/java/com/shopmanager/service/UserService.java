@@ -6,5 +6,9 @@ public interface UserService {
 
     int add(User user);
 
+    int update(User user);
+
     User getByUsername(String username);
+
+    User getByUserid(int userid);
 }

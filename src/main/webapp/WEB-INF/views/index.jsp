@@ -14,8 +14,8 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="${requestScope.getContextPath}/css/bootstrap.min.css">
-    <link href="css/fontawesome-all.min.css" rel="stylesheet">
-    <link href="css/base.css" rel="stylesheet">
+    <link href="/css/fontawesome-all.min.css" rel="stylesheet">
+    <link href="/css/base.css" rel="stylesheet">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp" crossorigin="anonymous">
 </head>
 <body>
@@ -34,7 +34,7 @@
         <div class="navbar-collapse collapse">
             <ul class="nav navbar-nav">
                 <li class="active"><a href="/"><span class="fas fa-home"></span>首页</a></li>
-                <li><a href="#"><span class="fas fa-cart-plus"></span>购物车</a></li>
+                <li><a href="/shopcart"><span class="fas fa-cart-plus"></span>购物车</a></li>
             </ul>
             <c:if test="${username!=null}">
                 <ul class="nav navbar-nav pull-right">
@@ -79,8 +79,8 @@
     </div>
 
 </main>
-<script src="js/jquery.min.js"></script>
-<script src="js/bootstrap.min.js"></script>
+<script src="/js/jquery.min.js"></script>
+<script src="/js/bootstrap.min.js"></script>
 <script>
     $(".search-button").click(function (){
         var search = $("#search").val().trim();
@@ -92,13 +92,13 @@
             var products = $.parseJSON(JSON.stringify(data));
             for(var j=0;j<products.length;j++){
                 var btn = '<div class="products tab-pane col-md-12">' +
-                    '                <div class="col-md-3 visible-md-inline-block img-thumbnail">' +
+                    '                <a class="col-md-3 visible-md-inline-block img-thumbnail" href="/product/'+products[j].proId+'">' +
                     '                    <button class="btn btn-light challenge-button w-100 text-truncate pt-3 pb-3 mb-2">' +
                     '                        <img src="'+products[j].proImage+'" class="thumbnail img-responsive"/>' +
-                    '                        <a href="/product/"+products[j].proId>'+products[j].proName+'</a>' +
+                    '                        <p>'+products[j].proName+'</p>' +
                     '                        <span>￥'+products[j].proPrice+'</span>' +
                     '                    </button>' +
-                    '                </div>' +
+                    '                </a>' +
                     '            </div>';
                 probody.append(btn);
             }

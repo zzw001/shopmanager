@@ -20,6 +20,11 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
+    public int update(Product product) {
+        return productMapper.updateByPrimaryKeySelective(product);
+    }
+
+    @Override
     public List<Product> getBySubId(int subid) {
         return productMapper.selectBySubId(subid);
     }
@@ -32,5 +37,10 @@ public class ProductServiceImpl implements ProductService {
     @Override
     public List<Product> getBySearch(String search) {
         return productMapper.selectBySearch(search);
+    }
+
+    @Override
+    public List<Product> getAll() {
+        return productMapper.selectAll();
     }
 }

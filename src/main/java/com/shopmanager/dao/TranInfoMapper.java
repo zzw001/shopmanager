@@ -27,4 +27,6 @@ public interface TranInfoMapper {
     int updateByPrimaryKeySelective(TranInfo record);
 
     int updateByPrimaryKey(TranInfo record);
+
+    List<TranInfo> selectByTranId(String TranId);
 }

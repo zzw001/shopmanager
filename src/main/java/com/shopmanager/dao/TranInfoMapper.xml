@@ -87,6 +87,12 @@
     from tran_info
     where tran_info_id = #{tranInfoId,jdbcType=INTEGER}
   </select>
+  <select id="selectByTranId" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select
+    <include refid="Base_Column_List" />
+    from tran_info
+    where tran_id = #{tranId,jdbcType=VARCHAR}
+  </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
     delete from tran_info
     where tran_info_id = #{tranInfoId,jdbcType=INTEGER}

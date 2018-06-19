@@ -31,4 +31,6 @@ public interface ProductMapper {
     List<Product> selectBySubId(Integer subId);
 
     List<Product> selectBySearch(String search);
+
+    List<Product> selectAll();
 }

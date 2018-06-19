@@ -27,4 +27,6 @@ public interface TransportationMapper {
     int updateByPrimaryKeySelective(Transportation record);
 
     int updateByPrimaryKey(Transportation record);
+
+    Transportation selectByCateId(Integer cateId);
 }

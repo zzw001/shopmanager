@@ -1,5 +1,6 @@
 package com.shopmanager.controller;
 
+import com.shopmanager.entity.ProductList;
 import com.shopmanager.model.Catagory;
 import com.shopmanager.model.Manager;
 import com.shopmanager.model.Product;
@@ -72,12 +73,29 @@ public class ShopController {
                 model.addAttribute("error",error);
                 return "shop/login";
             }
+        }else{
+            if(request.getSession().getAttribute("username") == null){
+                return "shop/login";
+            }
+            List<Catagory> catagories = catagoryService.getAll();
+            List<String> catenames = new ArrayList<>();
+            for(Catagory catagory : catagories){
+                List<Subcata> subcatas = subCataService.getByCataId(catagory.getCataId());
+                for (Subcata subcata : subcatas){
+                    catenames.add(subcata.getSubId()+"-"+catagory.getCataName()+"-"+subcata.getSubName());
+                }
+            }
+            model.addAttribute("catename","请选择分类");
+            model.addAttribute("categorys",catenames);
+            return "shop/index";
         }
-        return "shop/login";
     }
 
     @RequestMapping("/add")
     public String index(HttpServletRequest request, Model model, @RequestParam("file")MultipartFile file){
+        if(request.getSession().getAttribute("username") == null){
+            return "shop/login";
+        }
         String pro_name = request.getParameter("pro_name");
         String pro_price = request.getParameter("pro_price");
         String pro_stack = request.getParameter("pro_stack");
@@ -129,6 +147,37 @@ public class ShopController {
         }
         productService.add(product);
 
+        return "redirect:/shop/list";
+    }
+
+    @RequestMapping("/list")
+    public String list(HttpServletRequest request,Model model){
+        if(request.getSession().getAttribute("username") == null){
+            return "shop/login";
+        }
+        List<Product> products = productService.getAll();
+        List<Catagory> catagories = catagoryService.getAll();
+        List<Subcata> subcatas = subCataService.getAll();
+        List<ProductList> productLists = new ArrayList<>();
+        for(Product product : products){
+            ProductList productList = new ProductList();
+            productList.setProname(product.getProName());
+            for(Subcata subcata : subcatas){
+                if(subcata.getSubId() == product.getSubId()){
+                    for(Catagory catagory : catagories){
+                        if(catagory.getCataId() == subcata.getCataId()){
+                            productList.setCatagory(catagory.getCataName()+"-"+subcata.getSubName());
+                            break;
+                        }
+                    }
+                    break;
+                }
+            }
+            productList.setPrice(product.getProPrice());
+            productList.setSize(product.getProSize());
+            productLists.add(productList);
+        }
+        model.addAttribute("products",productLists);
         return "shop/list";
     }
 }

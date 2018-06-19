@@ -26,7 +26,7 @@
         <div class="navbar-collapse collapse">
             <ul class="nav navbar-nav">
                 <li><a href="/"><span class="fas fa-home"></span>首页</a></li>
-                <li><a href="#"><span class="fas fa-cart-plus"></span>购物车</a></li>
+                <li><a href="/shopcart"><span class="fas fa-cart-plus"></span>购物车</a></li>
             </ul>
             <c:if test="${username!=null}">
                 <ul class="nav navbar-nav pull-right">
@@ -65,10 +65,11 @@
                     </div>
                     <div class="form-group">
                         <label>购买数量</label>
-                        <input name="number" class="number-button"><small>库存:${product.proStack}件</small>
+                        <input type="number" name="number" class="number-button"><small>库存:${product.proStack}件</small>
+                        <input type="hidden" name="proid" value="${product.proId}">
                     </div>
                     <div class="col-md-offset-1">
-                        <button class="btn btn-danger center-block">添加到购物车</button>
+                        <button type="submit" class="btn btn-danger center-block">添加到购物车</button>
                     </div>
                 </form>
             </div>

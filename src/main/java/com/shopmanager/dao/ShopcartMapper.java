@@ -27,4 +27,12 @@ public interface ShopcartMapper {
     int updateByPrimaryKeySelective(Shopcart record);
 
     int updateByPrimaryKey(Shopcart record);
+
+    List<Shopcart> selectBuyByUserId(Integer userId);
+
+    List<Shopcart> selectNotBuyByUserId(Integer userId);
+
+    List<Shopcart> selectAllBuy();
+
+    Shopcart selectShopcart(@Param("proId") int proId,@Param("userId") int userId);
 }

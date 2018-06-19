@@ -87,6 +87,12 @@
     from transportation
     where tran_id = #{tranId,jdbcType=VARCHAR}
   </select>
+  <select id="selectByCateId" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select
+    <include refid="Base_Column_List" />
+    from transportation
+    where cart_id = #{cartId,jdbcType=INTEGER}
+  </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
     delete from transportation
     where tran_id = #{tranId,jdbcType=VARCHAR}

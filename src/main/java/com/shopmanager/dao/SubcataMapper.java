@@ -29,4 +29,6 @@ public interface SubcataMapper {
     int updateByPrimaryKey(Subcata record);
 
     List<Subcata> selectByCataId(int cataid);
+
+    List<Subcata> selectAll();
 }

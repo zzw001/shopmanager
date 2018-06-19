@@ -18,4 +18,9 @@ public class SubCataServiceImpl implements SubCataService {
     public List<Subcata> getByCataId(int cataid) {
         return subcataMapper.selectByCataId(cataid);
     }
+
+    @Override
+    public List<Subcata> getAll() {
+        return subcataMapper.selectAll();
+    }
 }
