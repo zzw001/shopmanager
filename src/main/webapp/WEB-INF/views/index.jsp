@@ -91,8 +91,8 @@
             var probody = $(".products").empty();
             var products = $.parseJSON(JSON.stringify(data));
             for(var j=0;j<products.length;j++){
-                var btn = '<div class="products tab-pane col-md-12">' +
-                    '                <a class="col-md-3 visible-md-inline-block img-thumbnail" href="/product/'+products[j].proId+'">' +
+                var btn = '<div class="products tab-pane col-md-3">' +
+                    '                <a class="img-thumbnail" href="/product/'+products[j].proId+'">' +
                     '                    <button class="btn btn-light challenge-button w-100 text-truncate pt-3 pb-3 mb-2">' +
                     '                        <img src="'+products[j].proImage+'" class="thumbnail img-responsive"/>' +
                     '                        <p>'+products[j].proName+'</p>' +
@@ -128,8 +128,8 @@
                     var probody = $(".products").empty();
                     var products = $.parseJSON(JSON.stringify(data));
                     for(var j=0;j<products.length;j++){
-                        var btn = '<div class="products tab-pane col-md-12">' +
-                            '                <a class="col-md-3 visible-md-inline-block img-thumbnail" href="/product/'+products[j].proId+'">' +
+                        var btn = '<div class="products tab-pane col-md-3">' +
+                            '                <a class="img-thumbnail" href="/product/'+products[j].proId+'">' +
                             '                    <button class="btn btn-light challenge-button w-100 text-truncate pt-3 pb-3 mb-2">' +
                             '                        <img src="'+products[j].proImage+'" class="thumbnail img-responsive"/>' +
                             '                        <p>'+products[j].proName+'</p>' +

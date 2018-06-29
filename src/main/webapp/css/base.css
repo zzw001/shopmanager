@@ -61,6 +61,10 @@ table > thead > tr > td {
     background-color: #ffffff;
 }
 
+.products{
+    margin-bottom: 10px;
+}
+
 .search {
 width: 80%;
 height:34px;
